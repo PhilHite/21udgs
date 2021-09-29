@@ -1,5 +1,5 @@
 # 21udgs
-21UDGS By Phil Hite 2007 Version 1.40
+21UDGS 1.4 By Phil Hite 2007
 
 Freeware for the 48K or 128K ZX Spectrum.
 
