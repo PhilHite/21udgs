@@ -1,0 +1,60 @@
+   10 REM 21UDGS EXAMPLES BY PHIL HITE 2021
+   20 LIST : STOP 
+   30 REM HOW TO USE UDGS IN BASIC
+   40 REM In this example, 4 UDGs are defined as club, diamond, heart and spade.
+   50 REM Set g to the number of UGS required from 1 to 21.
+   60 FOR g=1 TO 4: READ g$: FOR y=0 TO 7: READ x: POKE USR g$+y,x: NEXT y: NEXT g
+   70 DATA "c",16,56,56,84,254,254,84,56
+   80 DATA "d",16,56,124,254,254,124,56,16
+   90 DATA "h",108,254,254,254,254,124,56,16
+  100 DATA "s",16,56,124,254,254,84,16,56
+  110 REM SAVE VERIFY LOAD UDGS
+  120 REM Save the UDGs (21*8 bytes=168) stored at the current memory address.
+  130 SAVE "UDGS"CODE USR "a",168
+  140 VERIFY "UDGS"CODE USR "a"
+  150 LOAD "UDGS"CODE USR "a"
+  160 REM In 128K mode, UDGs T and U are reserved for the additional SPECTRUM and PLAY commands.
+  170 REM Enable UDGs T and U.
+  180 IF PEEK 23388=16 THEN POKE 23611,205
+  190 REM Enable SPECTRUM and PLAY again.
+  200 IF PEEK 23388=16 THEN POKE 23611,221
+  210 REM ADDITIONAL SETS OF UDGS SPECTRUM 48/128K
+  220 REM UDGs are stored in address 65368.
+  230 REM -168 from the memory address for each additional set of UDGs.
+  240 REM Set 1=65368
+  250 REM Set 2=65368-168=65200
+  260 REM Set 3=65200-168=65032
+  270 REM CLEAR lowest memory address-1.
+  280 CLEAR  65031
+  290 REM Set m to the memory address required, then GOSUB 340.
+  300 LET m=65368: GO SUB 340: REM Use Set 1.
+  310 LET m=65200: GO SUB 340: REM Use Set 2.
+  320 LET m=65032: GO SUB 340: REM Use Set 3.
+  330 STOP 
+  340 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN : REM Load slected set into memory.
+  350 REM CHECK IF SPECTRUM 16K
+  360 IF PEEK 23733=127 THEN PRINT "THIS IS A SPECTRUM 16K"
+  370 REM ADDITIONAL SETS OF UDGS SPECTRUM 16K
+  380 REM UDGs are stored in address 32600.
+  390 REM -168 from the memory address for each additional set of UDGs.
+  400 REM Set 1=32600
+  410 REM Set 2=32600-168=32432
+  420 REM Set 3=32432-168=32264
+  430 REM CLEAR lowest memory address-1.
+  440 CLEAR 32263
+  450 REM Set m to the memory address required, then GOSUB 500.
+  460 LET m=32600: GO SUB 500: REM Use Set 1.
+  470 LET m=32432: GO SUB 500: REM Use Set 2.
+  480 LET m=32264: GO SUB 500: REM Use Set 3.
+  490 STOP 
+  500 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN : REM Load slected set into memory.
+  510 REM SCREEN$ UDGS COLLISION DETECTION
+  520 REM SCREEN$ can't usually detect UDGs, but here's a solution.
+  530 PRINT "\a": REM GRAPHICS A
+  540 GO SUB 590: REM MOVE SCREEN$ POINTER
+  550 IF SCREEN$ (0,0)="A" THEN PRINT "Collision": GO TO 580: REM CAPITAL A
+  560 REM IF SCREEN$... MORE COLLISIONS
+  570 GO SUB 600: REM RESET SCREEN$ POINTER
+  580 STOP 
+  590 POKE 23606,PEEK 23675-8: POKE 23607,PEEK 23676-2: RETURN : REM MOVE SCREEN$ POINTER
+  600 POKE 23606,0: POKE 23607,60: RETURN : REM RESET SCREEN$ POINTER
