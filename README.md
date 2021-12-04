@@ -1,5 +1,5 @@
 # 21udgs
-21UDGS By Phil Hite 2007 Version 1.40
+21UDGS By Phil Hite 2007 Version 1.41
 
 Freeware for the 48K or 128K ZX Spectrum.
 
@@ -12,8 +12,8 @@ Keys:  ? or H=Help
        9, 0 or Z=Plot/Delete or Kempston joystick
        SYMBOL SHIFT+5 6 7 8=Plot 
        I=Ink P=Paper B=Bright F=Flash
-       S=Swap colours O=Clear colours
-       J=Clear pixels
+       S=Swap colours O=Clear colours/Undo
+       J=Clear pixels/Undo
        X=Cut C=Copy V=Paste
        N=Inverse Y=Rotate left U=Rotate right
        W=Flip horizontally E=Flip vertically
@@ -29,15 +29,26 @@ Keys:  ? or H=Help
        Q=Quit
 
 There are 2 Versions:
-21udgs140   =Machine Code compiled with MCoder III
-21udgs140bas=BASIC included for reference only as it is slow
-1510 FOR h=1 TO dh: NEXT h
+21udgs141   =Machine Code compiled with MCoder III
+21udgs141bas=BASIC included for reference only as it is slow
+1540 FOR h=1 TO dh: NEXT h
 This line slows the program down for compiling
-Add REM before running the BASIC version
 Remove REM before compiling with MCoder III
-Use GO TO 10 and not RUN to run the program
-21udgs140bas.txt=BASIC txt file
-If you BREAK into 21udgs140, restart the program with GO TO 10
+Delete line 10 before compiling with MCoder III (to save precious bytes of memory) 
+Use GO TO 20 and not RUN to run the program
+21udgs141bas.txt=BASIC txt file
+If you BREAK into 21udgs141, restart the program with GO TO 20
+
+Kempston joystick emulation with the Fuse emulator on the Mac 
+10 PRINT IN 31: GO TO 10
+When Preferences > Set joysticks on snapshot load is ticked, Kempston joystick emulation returns IN 31 values of 255 and 56 instead of 0.  
+21udgs141 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
+Kempston joystick Settings for 21udgs141.tzx
+Preferences > Untick Set joysticks on snapshot load
+Inputs > Joystick 1
+Real device SPEED_LINK Competition Pro
+Emulated joystick Kempston
+Tick Kempston joystick interface 
 
 HOW TO USE UDGS IN BASIC
 In this example, 4 UDGs C,D,H and S are defined as club, diamond, heart and spade.
@@ -75,7 +86,7 @@ Set m to the memory address required, then GO SUB 9999.
 30 LET m=65200: GO SUB 9999: REM USE SET 2
 40 LET m=65032: GO SUB 9999: REM USE SET 3
 50 STOP
-9999 POKE 23675,m-256*INT (m/256) : POKE 23676,INT (m/256) : RETURN : REM Load selected set into memory.
+9999 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN
 
 CHECK IF SPECTRUM 16K
 IF PEEK 23733=127 THEN PRINT "THIS IS A SPECTRUM 16K"
@@ -94,7 +105,7 @@ Set m to the memory address required, then GO SUB 9999.
 30 LET m=32432: GO SUB 9999: REM USE SET 2
 40 LET m=32264: GO SUB 9999: REM USE SET 3
 50 STOP
-9999 POKE 23675,m-256*INT (m/256) : POKE 23676,INT (m/256) : RETURN : REM Load selected set into memory.
+9999 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN
 
 SCREEN$ UDGS COLLISION DETECTION
 SCREEN$ can't usually detect UDGs, but here's a solution.
@@ -105,7 +116,7 @@ SCREEN$ can't usually detect UDGs, but here's a solution.
 50 GOSUB 9999: REM RESET SCREEN$ POINTER
 60 STOP
 9998 POKE 23606,PEEK 23675-8: POKE 23607,PEEK 23676-2: RETURN : REM MOVE SCREEN$ POINTER
-9999 POKE 23606,0: POKE 23607,60: RETURN : REM RESET SCREEN$ POINTER
+9999 POKE 23606,0: POKE 23607,60: RETURN : REM RESET SCREEN$ POINTER1
 
 References:
 Gerry Williams - Introduced me to computers and programming 1982
@@ -122,4 +133,4 @@ Thank you to everyone on the World of Spectrum and Spectrum Computing forums for
 https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
 phil_hite@hotmail.com
 
-21 Oct 2021
+4 Dec 2021
