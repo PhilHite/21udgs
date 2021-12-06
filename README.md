@@ -50,6 +50,7 @@ Preferences > Untick Set joysticks on snapshot load
 Inputs > Joystick 1
 Real device SPEED_LINK Competition Pro
 Emulated joystick Kempston
+Untick Interface 2
 Tick Kempston joystick interface 
 
 HOW TO USE UDGS IN BASIC
@@ -135,4 +136,4 @@ Thank you to everyone on the World of Spectrum and Spectrum Computing forums for
 https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
 phil_hite@hotmail.com
 
-5 Dec 2021
+6 Dec 2021
