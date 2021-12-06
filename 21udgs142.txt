@@ -47,6 +47,7 @@ Preferences > Untick Set joysticks on snapshot load
 Inputs > Joystick 1
 Real device SPEED_LINK Competition Pro
 Emulated joystick Kempston
+Untick Interface 2
 Tick Kempston joystick interface 
 
 HOW TO USE UDGS IN BASIC
