@@ -1,7 +1,7 @@
 # 21udgs
 A User Defined Graphics character designer for the ZX Spectrum 48K/128K
 
-21UDGS By Phil Hite 2007 Version 1.42
+21UDGS By Phil Hite 2007 Version 1.43
 
 Freeware for the 48K or 128K ZX Spectrum.
 
@@ -136,4 +136,4 @@ Thank you to everyone on the World of Spectrum and Spectrum Computing forums for
 https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
 phil_hite@hotmail.com
 
-6 Dec 2021
+8 Dec 2021
