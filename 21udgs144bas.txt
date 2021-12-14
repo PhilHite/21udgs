@@ -1,0 +1,250 @@
+   10 REM 21UDGS 1.44 BY PHIL HITE 2007
+   20 IF PEEK 23388=16 THEN POKE 23611,205
+   30 CLEAR 63855: LET mem=65368: GO SUB 1570: POKE 23658,0: DIM p(8,8): LET cpy=0: BORDER 0: PAPER 0: BRIGHT 1: OVER 0: INK 7: GO SUB 2010: GO SUB 1980: GO SUB 1670: GO SUB 1370
+   40 LET k=CODE INKEY$
+   50 LET ax=ABS (INT (gx/2-gx))-1: LET ay=ABS (INT (gy/2-gy))-1
+   60 LET at=ATTR (ay,ax): LET bt=0
+   70 IF at>127 THEN LET at=at-128: LET fh=1
+   80 IF at>63 THEN LET at=at-64: LET bt=1
+   90 IF at>7 THEN LET sp=INT (at/8): LET si=at-(sp*8)
+  100 IF at<8 THEN LET sp=0: LET si=at
+  110 LET sbt=bt: LET sfh=fh
+  120 IF k=0 AND IN 31=0 THEN GO TO 610
+  130 IF ((k<>106 AND k<>111 AND k<>0) OR IN 31<>0) AND jp=0 THEN LET jp=1
+  140 IF ((k<>106 AND k<>111 AND k<>0) OR IN 31<>0) AND cc=0 THEN LET cc=1
+  150 IF k=48 OR k=57 OR k=122 OR IN 31=16 THEN LET g(gy,gx)=NOT g(gy,gx): LET cg=1: GO SUB 1540: REM PLOT/DEL
+  160 IF k=109 THEN GO SUB 1390: GO SUB 1370: REM MEMORY
+  170 IF k=104 OR k=63 THEN GO SUB 2210: IF kc=121 THEN GO SUB 2010: GO SUB 1670: GO SUB 1370: REM HELP
+  180 IF k=106 AND jp=1 THEN LET jp=0: LET ov=0: GO SUB 2040: GO TO 610: REM CLEAR PIXELS
+  190 IF k=106 AND jp=0 THEN LET jp=1: LET ov=0: GO SUB 2040: REM UNDO CLEAR PIXELS
+  200 IF k=105 THEN GO SUB 710: GO SUB 1370: REM INK
+  210 IF k=112 THEN GO SUB 730: GO SUB 1370: REM PAPER
+  220 IF k=98 THEN LET bt=NOT bt: GO SUB 2040: GO SUB 1540: REM BRIGHT
+  230 IF k=102 THEN LET fh=NOT fh: GO SUB 2040: GO SUB 1540: REM FLASH
+  240 IF k=111 AND cc=1 THEN LET cc=0: LET ui=si: LET up=sp: LET ubt=sbt: LET ufh=sfh: LET i=7: LET p=0: LET bt=1: LET fh=0: LET ov=1: GO SUB 2040: GO SUB 1540: GO TO 610: REM CLEAR COLOURS
+  250 IF k=111 AND cc=0 THEN LET cc=1: LET i=ui: LET p=up: LET bt=ubt: LET fh=ufh: LET ov=1: GO SUB 2040: GO SUB 1540: REM UNDO CLEAR COLOURS
+  260 IF k=115 THEN LET i=sp: LET p=si: GO SUB 2040: GO SUB 1540: REM SWAP COLOURS
+  270 IF k=120 THEN LET cpy=1: LET i=7: LET p=0: LET bt=1: LET fh=0: LET ov=0: GO SUB 2040: REM CUT
+  280 IF k=99 THEN LET cpy=1: GO SUB 2040: REM COPY
+  290 IF k=118 AND cpy=1 THEN LET ov=0: GO SUB 2040: REM PASTE
+  300 IF (k=101 AND k2=0) OR k=37 OR k=38 OR k=39 OR k=40 OR k=110 OR  k=117 OR k=119 OR k=121 THEN GO SUB 2040: REM VERTICAL INVERSE ROTATE RIGHT HORIZONTAL ROTATE LEFT 
+  310 IF k2=101 THEN LET k2=0
+  320 IF k=114 THEN GO SUB 2210: IF kc=121 THEN GO SUB 1670: GO SUB 1370: REM RESIZE
+  330 IF k=103 THEN GO TO 820: REM DEFINE
+  340 IF k=97 THEN GO SUB 2210: IF kc=121 THEN GO SUB 1670: GO SUB 1370: REM CLEAR
+  350 IF k=100 THEN GO SUB 2210: IF kc=121 THEN GO TO 1110: REM DECIMAL
+  360 IF k=107 THEN GO SUB 2210: IF kc=121 THEN GO SUB 1660: GO TO 950: REM PICK
+  370 IF k=116 THEN COPY : GO SUB 1370: REM PRINT
+  380 IF k=108 THEN GO SUB 1780: GO SUB 1370: REM LOAD
+  390 IF k=113 THEN GO SUB 1820: GO SUB 1370: REM QUIT
+  400 REM LEFT
+  410 IF (k=53 OR IN 31=2) AND x>0 THEN LET x=x-4: LET gx=gx-1: GO TO 610
+  420 IF k=53 OR IN 31=2 THEN LET x=mx: LET gx=(x/4)+1
+  430 IF (k=8 OR IN 31=18) AND x>0 THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET x=x-4: LET gx=gx-1: GO TO 610
+  440 IF k=8 OR IN 31=18 THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET x=mx: LET gx=(x/4)+1
+  450 REM RIGHT
+  460 IF (k=56 OR IN 31=1) AND x<mx THEN LET x=x+4: LET gx=gx+1: GO TO 610
+  470 IF k=56 OR IN 31=1 THEN LET x=0: LET gx=1
+  480 IF (k=9 OR IN 31=17) AND x<mx THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET x=x+4: LET gx=gx+1: GO TO 610
+  490 IF k=9 OR IN 31=17 THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET x=0: LET gx=1
+  500 REM UP
+  510 IF (k=55 OR IN 31=8) AND y<174 THEN LET y=y+4: LET gy=gy-1: GO TO 610
+  520 IF k=55 OR IN 31=8 THEN LET y=my: LET gy=((174-y)/4)+1
+  530 IF (k=11 OR IN 31=24) AND y<174 THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET y=y+4: LET gy=gy-1: GO TO 610
+  540 IF k=11 OR IN 31=24 THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET y=my: LET gy=((174-y)/4)+1
+  550 REM DOWN
+  560 IF (k=54 OR IN 31=4) AND y>my THEN LET y=y-4: LET gy=gy+1: GO TO 610
+  570 IF k=54 OR IN 31=4 THEN LET y=174: LET gy=1
+  580 IF (k=10 OR IN 31=20) AND y>my THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET y=y-4: LET gy=gy+1: GO TO 610
+  590 IF k=10 OR IN 31=20 THEN GO SUB 680: LET g(gy,gx)=1: LET cg=1: LET y=174: LET gy=1
+  600 REM PLOT AND DELETE PLOT
+  610 GO SUB 680
+  620 REM DELAY FOR COMPILER
+  630 GO SUB 1540
+  640 IF g(gy,gx)=0 THEN OVER 0: GO SUB 680: OVER 1: GO SUB 680: OVER 0
+  650 IF g(gy,gx)=1 THEN OVER 1: GO SUB 680: OVER 0: GO SUB 680
+  660 GO TO 40
+  670 REM PLOT
+  680 PLOT x+1,y: DRAW 0,-2: PLOT x+2,y: DRAW 0,-2: IF x<252 THEN PLOT x+3,y: DRAW 0,-2
+  690 PLOT gx+71,-gy+40: RETURN 
+  700 REM INK
+  710 PRINT #0;AT 0,0; BRIGHT 1;"                                Ink? 0 "; INK 1;"1 "; INK 2;"2 "; INK 3;"3 "; INK 4;"4 "; INK 5;"5 "; INK 6;"6 "; INK 7;"7          ": GO TO 740
+  720 REM PAPER
+  730 PRINT #0;AT 0,0; BRIGHT 1;"                                Paper? 0 "; INK 1;"1 "; INK 2;"2 "; INK 3;"3 "; INK 4;"4 "; INK 5;"5 "; INK 6;"6 "; INK 7;"7        "
+  740 LET ka=CODE INKEY$
+  750 IF ka>47 AND ka<56 THEN GO TO 780
+  760 IF ka=13 THEN RETURN 
+  770 GO TO 740
+  780 IF k=105 THEN LET i=ka-48: LET si=i: REM INK
+  790 IF k=112 THEN LET p=ka-48: LET sp=p: REM PAPER
+  800 LET fh=0: LET bt=1: LET ov=1: GO SUB 2040: RETURN 
+  810 REM DEFINE GRAPHICS
+  820 PRINT #0;AT 0,0; BRIGHT 1;"                                Defining graphics...            ": PLOT 0,4: DRAW mp,0: DRAW 0,-4: DRAW -mp,0: DRAW 0,3
+  830 REM START UDGS
+  840 LET pb=1: LET udg=65: FOR z=0 TO mz STEP 8: LET xo=0: FOR n=1 TO mn: FOR r=0 TO 7: LET b=0: FOR c=1 TO 8
+  850 IF g(r+1+z,c+xo)=1 THEN LET b=b+d(c)
+  860 NEXT c: POKE USR CHR$ udg+r,b: NEXT r: PLOT pb,1: DRAW 2,0: PLOT pb,2: DRAW 2,0: PLOT pb,3: DRAW 2,0: LET udg=udg+1: LET xo=xo+8: LET pb=pb+4: NEXT n: NEXT z
+  870 IF gr=2 THEN FOR r=0 TO 7: POKE USR "q"+r,0: POKE USR "r"+r,0: POKE USR "s"+r,0: POKE USR "t"+r,0: NEXT r
+  880 IF gr>0 THEN FOR r=0 TO 7: POKE USR "u"+r,0: NEXT r
+  890 REM UDGS FINISHED
+  900 PRINT AT 21,0;"           ": LET cg=0
+  910 IF gr=0 THEN PRINT AT 17,18;"\a\b\c\d\e\f\g";AT 18,18;"\h\i\j\k\l\m\n";AT 19,18;"\o\p\q\r\s\t\u"
+  920 IF gr=1 THEN PRINT AT 17,18;"\a\b\c\d\e";AT 18,18;"\f\g\h\i\j";AT 19,18;"\k\l\m\n\o";AT 20,18;"\p\q\r\s\t"
+  930 IF gr=2 THEN PRINT AT 17,18;"\a\b\c\d\e\f\g\h";AT 18,18;"\i\j\k\l\m\n\o\p"
+  940 REM FINISHED UDGS OPTIONS
+  950 PRINT #0;AT 0,0; BRIGHT 1;"Edit      Decimal               Save      CleAr PicK Load Quit  "
+  960 LET k2=CODE INKEY$
+  970 IF k2=109 THEN GO SUB 1390: REM MEMORY
+  980 IF k2=114 THEN LET k=114: GO SUB 1660: LET k=112: GO SUB 1590: REM RESIZE
+  990 IF k2=101 THEN GO SUB 1370:: GO TO 40: REM EDIT
+ 1000 IF k2=100 THEN GO TO 1110: REM DECIMAL
+ 1010 IF k2=116 THEN COPY : REM PRINT
+ 1020 IF k2=104 OR k2=63 THEN GO SUB 2010: LET k=107: GO SUB 1660: REM HELP
+ 1030 IF k2=115 THEN GO SUB 1290: REM SAVE
+ 1040 IF k2=118 THEN GO SUB 1330: REM VERIFY
+ 1050 IF k2=107 THEN LET k=107: GO SUB 1660: REM PICK
+ 1060 IF k2=108 THEN GO SUB 1780: REM LOAD
+ 1070 IF k2=97 THEN LET k=99: GO SUB 1670: GO SUB 1370: GO TO 610: REM CLEAR
+ 1080 IF k2=113 THEN GO SUB 1820: REM QUIT
+ 1090 GO TO 950
+ 1100 REM LIST UDGS CODES IN DECIMAL
+ 1110 CLS : PRINT INVERSE 1;"   1   2   3   4   5   6   7   8": FOR u=65 TO mu: PRINT INVERSE 1;CHR$ u;: FOR r=0 TO 7: LET b=PEEK (USR CHR$ u+r)
+ 1120 IF r>0 THEN PRINT ",";
+ 1130 IF b<100 THEN PRINT " ";: IF b<10 THEN PRINT " ";
+ 1140 PRINT b;: NEXT r: PRINT : NEXT u: LET ul=0: IF mu<85 THEN LET ul=7: IF mu=80 THEN LET ul=39
+ 1150 OVER 1: PLOT 0,ul: DRAW 8,0: OVER 0: DRAW 247,0
+ 1160 PRINT #0;AT 0,0; BRIGHT 1;"Edit                 Help PrinT Save      CleAr PicK Load Quit  "
+ 1170 LET k2=CODE INKEY$
+ 1180 IF k2=115 THEN GO SUB 1290: REM SAVE
+ 1190 IF k2=118 THEN GO SUB 1330: REM VERIFY
+ 1200 IF k2=101 THEN CLS : LET k=107: GO SUB 1660: GO SUB 1370: GO TO 40: REM EDIT
+ 1210 IF k2=107 THEN CLS : LET k=107: GO SUB 1660: GO TO 950: REM PICK
+ 1220 IF k2=108 THEN GO SUB 1940: REM LOAD
+ 1230 IF k2=97 THEN LET k=99: CLS : GO SUB 1690: GO SUB 1370: GO TO 610: REM CLEAR
+ 1240 IF k2=113 THEN GO SUB 1820: REM QUIT
+ 1250 IF k2=116 THEN COPY : REM PRINT
+ 1260 IF k2=104 OR k2=63 THEN GO SUB 2010: GO TO 1110: REM HELP
+ 1270 GO TO 1160
+ 1280 REM SAVE
+ 1290 INPUT "Save filename? "; LINE f$
+ 1300 IF f$<>"" AND LEN f$<11 THEN SAVE f$ CODE USR "a",168
+ 1310 RETURN 
+ 1320 REM VERIFY
+ 1330 INPUT "Verify filename? "; LINE f$
+ 1340 IF f$<>"" AND LEN f$<11 THEN VERIFY f$ CODE USR "a"
+ 1350 RETURN 
+ 1360 REM DISPLAY EDIT UDGS OPTIONS
+ 1370 PRINT #0;AT 0,0; BRIGHT 1;"5678Move  9Plot/Del  Ink  Paper Graphics  CleAr PicK Load Quit  ": RETURN 
+ 1380 REM CHANGE SYS VAR UDGS MEMORY
+ 1390 LET dh=1500: PRINT AT 17,26;"M";#0;AT 0,0; BRIGHT 1;"                                Memory?     Enter             "
+ 1400 IF mem = 63856 THEN PRINT #0;AT 1,8; BRIGHT 1;" "
+ 1410 IF mem > 63856 THEN PRINT #0;AT 1,8; BRIGHT 1;"-"
+ 1420 IF mem = 65368 THEN PRINT #0;AT 1,10; BRIGHT 1;" "
+ 1430 IF mem < 65368 THEN PRINT #0;AT 1,10; BRIGHT 1;"+"
+ 1440 LET km=CODE INKEY$
+ 1450 IF km=45 AND mem >63856 THEN LET mem=mem-168: GO SUB 1490: GO TO 1400
+ 1460 IF km=43 AND mem <65368 THEN LET mem=mem+168: GO SUB 1490: GO TO 1400
+ 1470 IF km=13 THEN LET dh=750: PRINT AT 17,26;"M": RETURN 
+ 1480 GO TO 1440
+ 1490 PRINT AT 18,26;mem: GO SUB 1570
+ 1500 IF gr=0 THEN PRINT AT 17,18;"\a\b\c\d\e\f\g ";AT 18,18;"\h\i\j\k\l\m\n ";AT 19,18;"\o\p\q\r\s\t\u"
+ 1510 IF gr=1 THEN PRINT AT 17,18;"\a\b\c\d\e  ";AT 18,18;"\f\g\h\i\j  ";AT 19,18;"\k\l\m\n\o  ";AT 20,18;"\p\q\r\s\t"
+ 1520 IF gr=2 THEN PRINT AT 17,18;"\a\b\c\d\e\f\g\h";AT 18,18;"\i\j\k\l\m\n\o\p";AT 19,18;"     ";AT 20,18;"     "
+ 1530 REM DELAY FOR COMPILER
+ 1540 REM FOR h=1 TO dh: NEXT h
+ 1550 RETURN 
+ 1560 REM SET SYSTEM VARIABLE UDGS MEMORY
+ 1570 POKE 23675,mem-256*INT (mem/256): POKE 23676,INT (mem/256): RETURN 
+ 1580 REM PICK UDGS
+ 1590 PLOT 0,4: DRAW mp,0: DRAW 0,-4: DRAW -mp,0: DRAW 0,3: LET pb=1: LET gx=0: LET gy=174: LET udg=65: FOR z=0 TO mz STEP 8: LET xo=0: LET gx=xo*4: FOR n=1 TO mn: FOR r=0 TO 7: LET b=PEEK (USR CHR$ udg+r): LET s=128: FOR c=1 TO 8: LET t=INT (b/s): LET g(r+1+z,c+xo)=t: IF t=1 THEN GO SUB 1630
+ 1600 LET b=b-t*s: LET s=s/2: LET gx=gx+4: NEXT c: LET gy=gy-4: LET gx=xo*4: NEXT r: GO SUB 1640: LET udg=udg+1: LET xo=xo+8: LET gx=xo*4: LET gy=gy+32: NEXT n: LET gy=gy-32: NEXT z
+ 1610 PRINT AT 21,0;"           ": LET x=0: LET y=174: LET gx=1: LET gy=1: LET py=1: RETURN 
+ 1620 REM PLOT PICK
+ 1630 PLOT gx+1,gy: DRAW 2,0: PLOT gx+1,gy-1: DRAW 2,0: PLOT gx+1,gy-2: DRAW 2,0: PLOT gx/4+72,gy/4-5: RETURN 
+ 1640 PLOT pb,1: DRAW 2,0: PLOT pb,2: DRAW 2,0: PLOT pb,3: DRAW 2,0: LET pb=pb+4: RETURN 
+ 1650 REM GRID
+ 1660 PRINT #0;AT 0,0; BRIGHT 1;"                                Picking up graphics...          "
+ 1670 LET i=7: LET p=0: LET bt=1: LET fh=0: INK i
+ 1680 IF k=114 THEN LET gr=gr+1: IF gr=3 THEN LET gr=0
+ 1690 FOR c=0 TO 12: PRINT AT c,0;"                                ": NEXT c: FOR c=12 TO 16: PRINT AT c,0;"                     ": NEXT c
+ 1700 IF gr=0 THEN FOR x=0 TO 224 STEP 32: PLOT x,175: DRAW 0,-95: NEXT x: FOR y=175 TO 79 STEP -32: PLOT 0,y: DRAW 224,0: NEXT y: PRINT AT 17,0;"ABCDEFG           \a\b\c\d\e\f\g ";AT 18,0;"HIJKLMN           \h\i\j\k\l\m\n ";AT 19,0;"OPQRSTU           \o\p\q\r\s\t\u": LET mx=220: LET my=82: LET mz=16: LET mn=7: LET mp=84: LET mu=85: LET mh=24: LET mv=56
+ 1710 IF gr=1 THEN FOR x=0 TO 160 STEP 32: PLOT x,175: DRAW 0,-127: NEXT x: FOR y=175 TO 47 STEP -32: PLOT 0,y: DRAW 160,0: NEXT y: PRINT AT 17,0;"ABCDE             \a\b\c\d\e  ";AT 18,0;"FGHIJ             \f\g\h\i\j  ";AT 19,0;"KLMNO             \k\l\m\n\o  ";AT 20,0;"PQRST             \p\q\r\s\t": LET mx=156: LET my=50: LET mz=24: LET mn=5: LET mp=80: LET mu=84: LET mh=32: LET mv=40
+ 1720 IF gr=2 THEN FOR x=0 TO 252 STEP 32: PLOT x,175: DRAW 0,-63: NEXT x: FOR y=175 TO 111 STEP -32: PLOT 0,y: DRAW 255,0: NEXT y: PLOT 255,174: DRAW 0,-62: PRINT AT 17,0;"ABCDEFGH          \a\b\c\d\e\f\g\h";AT 18,0;"IJKLMNOP          \i\j\k\l\m\n\o\p";AT 19,0;"                         ";AT 20,0;"                         ": LET mx=252: LET my=114: LET mz=8: LET mn=8: LET mp=64: LET mu=80: LET mh=16: LET mv=64
+ 1730 PRINT AT 17,26;"Memory";AT 18,26;mem;AT 19,26;"Help";AT 20,26;"Resize";AT 21,26;"PrinT"
+ 1740 GO SUB 1990
+ 1750 IF k=107 THEN GO TO 1590
+ 1760 RETURN 
+ 1770 REM LOAD
+ 1780 INPUT "Load filename? "; LINE f$
+ 1790 IF f$<>"" AND LEN f$<11 THEN INK 7: PRINT AT 20,0;: LOAD f$ CODE USR "a": PRINT AT 21,0;"                 ": LET k=112: GO SUB 1660: GO TO 950
+ 1800 RETURN 
+ 1810 REM QUIT
+ 1820 PRINT #0;AT 0,0; INK 7; BRIGHT 1;"                                Quit? Y N                     "
+ 1830 LET kq=CODE INKEY$
+ 1840 IF kq=121 THEN GO TO 1870
+ 1850 IF kq=13 OR kq=110 THEN RETURN 
+ 1860 GO TO 1830
+ 1870 PRINT #0;AT 0,0; INK 7; BRIGHT 1;"                                Keep Graphics in Memory? Y N": PAUSE 0
+ 1880 LET km=CODE INKEY$
+ 1890 IF km=121 THEN NEW 
+ 1900 IF km=110 THEN RANDOMIZE USR 0
+ 1910 IF km=13 THEN RETURN 
+ 1920 GO TO 1880
+ 1930 REM LOAD AND LIST DECIMAL
+ 1940 INPUT "Load filename? "; LINE f$
+ 1950 IF f$<>"" AND LEN f$<11 THEN FOR c=1 TO 21: PRINT AT c,1;"                               ": NEXT c: PRINT AT 0,0;: LOAD f$ CODE USR "a": PRINT AT 1,0;: GO TO 1120
+ 1960 RETURN 
+ 1970 REM VARIABLES
+ 1980 LET k=0: LET gr=0: LET cg=0: LET dh=750
+ 1990 DIM g(32,64): DIM o(8,8): DIM j(8,8): LET x=0: LET y=174: LET gx=1: LET gy=1: DIM d(8): LET d(1)=128: LET d(2)=64: LET d(3)=32: LET d(4)=16: LET d(5)=8: LET d(6)=4: LET d(7)=2: LET d(8)=1: LET bt=1: LET fh=0: LET ov=1: LET k2=0: LET jp=1: LET cc=1: RETURN 
+ 2000 REM HELP
+ 2010 CLS : PRINT "21UDGS 1.44 BY PHIL HITE 2007": PRINT '"? or Help                       5Left 6Down 7Up 8Right Kempston CAPS SHIFT  +5678Plot  joystick 9, 0 or ZPlot/Delete            SYMBOL SHIFT+5678Nudge          Ink Paper 0 to 7 Bright Flash   Swap colours Clear cOlours/Undo JClear pixels/Undo              XCut Copy VPaste                INverse Rotate YLeft URight     Flip WHorizontally VErtically   Memory address - or +           Define Graphics                 List Decimal codes Edit         PicK up graphics from memory    Resize grid to 5x4, 8x2 or 7x3  Save Verify Load                PrinT CleAr grid Quit": PRINT '"Press any key to continue. PrinT"
+ 2020 PAUSE 0: IF INKEY$="t" THEN COPY : GO TO 2020
+ 2030 CLS : RETURN 
+ 2040 LET fi=gx: GO SUB 2180: LET fx=fi: LET bx=2*fi: LET fi=gy: GO SUB 2180: LET fy=fi: LET by=2*fi: REM FILL COLOURS
+ 2050 IF k=37 OR k=38 OR k=39 OR k=40 OR k=99 OR k=101 OR k=110 OR k=117 OR k=119 OR k=120 OR k=121 THEN DEF FN u(d,c)=22528+c+(d*32): LET att=PEEK FN u(fy,fx): REM STORE COLOURS FOR COPY VERTICAL INVERSE ROTATE RIGHT HORIZONTAL CUT ROTATE LEFT  
+ 2060 IF (k=106 AND jp=0) OR k<>106 THEN PRINT AT fy,fx; INK i; PAPER p; BRIGHT bt; FLASH fh; OVER ov;"    ";AT fy+1,fx;"    ";AT fy+2,fx;"    ";AT fy+3,fx;"    ": REM FILL CHANGED COLOURS
+ 2070 IF k=37 OR k=38 OR k=39 OR k=40 OR k=99 OR k=101 OR k=110 OR k=117 OR k=119 OR k=121 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET o(b,a)=g(b+by,a+bx): LET p(b,a)=o(b,a): NEXT a: NEXT b: REM COPY VERTICAL INVERSE ROTATE RIGHT HORIZONTAL ROTATE LEFT 
+ 2080 IF k=120 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET o(b,a)=g(b+by,a+bx): LET p(b,a)=o(b,a): LET g(b+by,a+bx)=0: NEXT a: NEXT b: REM CUT
+ 2090 IF k=118 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET g(b+by,a+bx)=p(b,a): NEXT a: NEXT b: REM PASTE
+ 2100 IF k=106 AND jp=0 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET j(b,a)=g(b+by,a+bx): LET g(b+by,a+bx)=0: NEXT a: NEXT b: REM CLEAR PIXELS
+ 2110 IF k=(106 AND jp=0) OR k=120 THEN GO SUB 2490: REM DRAW GRID
+ 2120 LET px=1: IF gx>8 THEN LET px=2: IF gx>16 THEN LET px=3: IF gx>24 THEN LET px=4: IF gx>32 THEN LET px=5: IF gx>40 THEN LET px=6: IF gx>48 THEN LET px=7: IF gx>56 THEN LET px=8        
+ 2130 LET py=1: IF gy>8 THEN LET py=2: IF gy>16 THEN LET py=3: IF gy>24 THEN LET py=4
+ 2140 PRINT AT py+16,px+8; INK i; PAPER p; BRIGHT bt; FLASH fh; OVER ov;" ": LET i=8: INK i: LET p=8: LET ov=1
+ 2150 IF (k=106 AND jp=1) OR k=37 OR k=38 OR k=39 OR k=40 OR k=101 OR k=110 OR k=117 OR k=119 OR k=121 THEN GO TO 2280: REM UNDO CLEAR PIXELS VERTICAL INVERSE ROTATE RIGHT HORIZONTAL VERTICAL ROTATE LEFT
+ 2160 IF k=118 THEN GO TO 2400: REM PASTE
+ 2170 RETURN 
+ 2180 IF fi<9 THEN LET fi=0: RETURN 
+ 2190 LET fi=ABS (INT ((fi-1)/8))*4: RETURN 
+ 2200 REM CONFIRM CLEAR
+ 2210 IF cg=0 THEN LET kc=121: RETURN 
+ 2220 PRINT #0;AT 0,0; BRIGHT 1;"                                Confirm? Grid will clear. Y N "
+ 2230 LET kc=CODE INKEY$
+ 2240 IF kc=13 OR kc=110 THEN GO TO 1370
+ 2250 IF kc=121 THEN LET cg=0: RETURN 
+ 2260 GO TO 2210
+ 2270 REM TRANSFORM
+ 2280 IF k=110 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET o(b,a)=NOT o(b,a): NEXT a: NEXT b: REM INVERSE
+ 2290 IF k=119 THEN LET oh1=8: FOR b=1 TO 8: FOR a=1 TO 8: LET o(b,a)=p(oh1,a): NEXT a: LET oh1=oh1-1: NEXT b: REM HORIZONTAL
+ 2300 IF k=101 THEN FOR b=1 TO 8: LET ov1=8: FOR a=1 TO 8: LET o(b,a)=p(b,ov1): LET ov1=ov1-1: NEXT a: NEXT b: REM VERTICAL
+ 2310 IF k=121 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET o(b,a)=p(a,9-b): NEXT a: NEXT b: REM ROTATE LEFT
+ 2320 IF k=117 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET o(b,a)=p(9-a,b): NEXT a: NEXT b: REM ROTATE RIGHT
+ 2330 IF k=37 THEN FOR b=1 TO 8: FOR a=8 TO 2 STEP -1: LET o(b,a-1)=p(b,a): NEXT a: LET o(b,8)=0: NEXT b: REM NUDGE LEFT
+ 2340 IF k=40 THEN FOR b=1 TO 8: FOR a=1 TO 7: LET o(b,a+1)=p(b,a): NEXT a: LET o(b,1)=0: NEXT b: REM NUDGE RIGHT
+ 2350 IF k=39 THEN FOR b=8 TO 2 STEP -1: FOR a=1 TO 8: LET o(b-1,a)=p(b,a): LET o(8,a)=0: NEXT a: NEXT b: REM NUDGE UP
+ 2360 IF k=38 THEN FOR b=1 TO 7: FOR a=1 TO 8: LET o(b+1,a)=p(b,a): LET o(1,a)=0: NEXT a: NEXT b: REM NUDGE DOWN
+ 2370 IF k=106 AND jp=1 THEN FOR b=1 TO 8: FOR a=1 TO 8: LET o(b,a)=j(b,a): LET j(b,a)=0: NEXT a: NEXT b: REM UNDO CLEAR PIXELS
+ 2380 REM FILL COLOURS FOR TRANSFORMED UDG
+ 2390 IF k<>118 AND k<>106 THEN PRINT AT fy,fx; INK si; PAPER sp; BRIGHT bt; FLASH fh;"    ";AT fy+1,fx;"    ";AT fy+2,fx;"    ";AT fy+3,fx;"    ";AT py+16,px+8;" "
+ 2400 IF k=118 THEN FOR b=fy TO fy+3: FOR a=fx TO fx+3: POKE FN u(b,a),att: NEXT a: NEXT b: POKE FN u(py+16,px+8),att
+ 2410 IF k<>106 THEN GO SUB 2490: REM DRAW GRID
+ 2420 LET pb=175-(fy*8+1): LET pa=fx*8+1: LET qb=39-(fy*2): LET qa=72+(fx*2)
+ 2430 FOR b=1 TO 8: FOR a=1 TO 8
+ 2440 IF k=118 THEN LET g(fy*2+b,fx*2+a)=p(b,a): GO TO 2460: REM PASTE
+ 2450 LET g(fy*2+b,fx*2+a)=o(b,a): REM NOT PASTE
+ 2460 IF g(fy*2+b,fx*2+a)=1 THEN PLOT pa,pb: DRAW 0,-2: PLOT pa+1,pb: DRAW 0,-2: IF a<252 THEN PLOT pa+2,pb: DRAW 0,-2: PLOT qa,qb
+ 2470 LET pa=pa+4: LET qa=qa+1: NEXT a: LET pa=fx*8+1: LET qa=72+(fx*2): LET pb=pb-4: LET qb=qb-1: NEXT b: LET cg=1: GO TO 1370
+ 2480 RETURN 
+ 2490 PLOT fx*8+31,175-(fy*8): DRAW -31,0: DRAW 0,-31: IF fx=28 THEN PLOT fx*8+31,174-(fy*8): DRAW 0,-30: REM DRAW GRID
+ 2500 RETURN
