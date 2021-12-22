@@ -12,7 +12,7 @@ Keys:  ? or H=Help
        5=Left 6=Down 7=Up 8=Right
        CAPS SHIFT+5 6 7 8=Plot 
        9, 0 or Z=Plot/Delete or Kempston joystick
-       SYMBOL SHIFT+5 6 7 8=Plot 
+       SYMBOL SHIFT+5 6 7 8=Nudge 
        I=Ink P=Paper B=Bright F=Flash
        S=Swap colours O=Clear colours/Undo
        J=Clear pixels/Undo
@@ -136,4 +136,4 @@ Thank you to everyone on the World of Spectrum and Spectrum Computing forums for
 https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
 phil_hite@hotmail.com
 
-14 Dec 2021
+22 Dec 2021
