@@ -24,7 +24,7 @@ Keys:  ? or H=Help
        D=List decimal codes
        E=Edit
        K=Pick up graphics from memory
-       R=Resize grid to 5x4, 8x2 or 7x3        
+       R=Resize grid to 5x4, 8x2 or 7x3     
        S=Save V=Verify L=Load
        T=Print         
        A=Clear grid      
