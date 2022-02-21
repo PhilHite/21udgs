@@ -1,7 +1,7 @@
 # 21udgs
 A User Defined Graphics character designer for the ZX Spectrum 48K/128K
 
-21UDGS By Phil Hite 2007 Version 1.48
+21UDGS By Phil Hite 2007 Version 1.49
 
 Freeware for the 48K or 128K ZX Spectrum.
 
@@ -11,7 +11,7 @@ You can store up to 10 sets of UDGs in memory.
 Keys:  ? or H=Help
        5=Left 6=Down 7=Up 8=Right
        CAPS SHIFT+5 6 7 8=Plot 
-       9, 0 or Z=Plot/Delete or Kempston joystick
+       0, 9 or Z=Plot/Delete or Kempston joystick
        SYMBOL SHIFT+5 6 7 8=Nudge 
        I=Ink P=Paper B=Bright F=Flash
        S=Swap colours O=Clear colours/Undo
@@ -31,21 +31,22 @@ Keys:  ? or H=Help
        Q=Quit
 
 There are 2 Versions:
-21udgs148   =Machine Code compiled with MCoder III
-21udgs148bas=BASIC included for reference only as it is slow
+21udgs149   =Machine Code compiled with MCoder III
+21udgs149bas=BASIC included for reference only as it is slow
 1540 FOR h=1 TO dh: NEXT h
 This line slows the program down for compiling
 Remove REM before compiling with MCoder III
-Delete line 10 before compiling with MCoder III (to save precious bytes of memory) 
+Delete line 10 before compiling with MCoder III (to save precious bytes of memory)
+Compile using a 128K Spectrum in 48K mode (again to save precious bytes of memory) 
 Use GO TO 20 and not RUN to run the program
-21udgs148bas.txt=BASIC txt file
-If you BREAK into 21udgs148, restart the program with GO TO 20
+21udgs149bas.txt=BASIC txt file
+If you BREAK into 21udgs149, restart the program with GO TO 20
 
 Kempston joystick emulation with the Fuse emulator on the Mac 
 10 PRINT IN 31: GO TO 10
 When Preferences > Set joysticks on snapshot load is ticked, Kempston joystick emulation returns IN 31 values of 255 and 56 instead of 0.  
-21udgs148 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
-Kempston joystick Settings for 21udgs148.tzx
+21udgs149 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
+Kempston joystick Settings for 21udgs149.tzx
 Preferences > Untick Set joysticks on snapshot load
 Inputs > Joystick 1
 Real device SPEED_LINK Competition Pro
@@ -136,4 +137,4 @@ Thank you to everyone on the World of Spectrum and Spectrum Computing forums for
 https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
 phil_hite@hotmail.com
 
-18 January 2022
+21 February 2022
