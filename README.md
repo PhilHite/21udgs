@@ -1,7 +1,7 @@
 # 21udgs
 A User Defined Graphics character designer for the ZX Spectrum 48K/128K
 
-21UDGS By Phil Hite 2007 Version 1.49
+21UDGS By Phil Hite 2007 Version 1.50
 
 Freeware for the 48K or 128K ZX Spectrum.
 
@@ -31,8 +31,8 @@ Keys:  ? or H=Help
        Q=Quit
 
 There are 2 Versions:
-21udgs149   =Machine Code compiled with MCoder III
-21udgs149bas=BASIC included for reference only as it is slow
+21udgs150   =Machine Code compiled with MCoder III
+21udgs150bas=BASIC included for reference only as it is slow
 1540 FOR h=1 TO dh: NEXT h
 This line slows the program down for compiling
 Remove REM before compiling with MCoder III
@@ -137,4 +137,4 @@ Thank you to everyone on the World of Spectrum and Spectrum Computing forums for
 https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
 phil_hite@hotmail.com
 
-21 February 2022
+11 July 2022
