@@ -39,13 +39,13 @@ Remove REM before compiling with MCoder III
 Delete line 10 before compiling with MCoder III (to save precious bytes of memory)
 Compile using a 128K Spectrum in 48K mode (again to save precious bytes of memory) 
 Use GO TO 20 and not RUN to run the program
-21udgs149bas.txt=BASIC txt file
-If you BREAK into 21udgs149, restart the program with GO TO 20
+21udgs150bas.txt=BASIC txt file
+If you BREAK into 21udgs150, restart the program with GO TO 20
 
-Kempston joystick emulation with the Fuse emulator on the Mac 
+Kempston joystick emulation with the Fuse emulator on the Mac
 10 PRINT IN 31: GO TO 10
 When Preferences > Set joysticks on snapshot load is ticked, Kempston joystick emulation returns IN 31 values of 255 and 56 instead of 0.  
-21udgs149 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
+21udgs150 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
 Kempston joystick Settings for 21udgs149.tzx
 Preferences > Untick Set joysticks on snapshot load
 Inputs > Joystick 1
