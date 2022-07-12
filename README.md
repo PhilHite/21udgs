@@ -57,7 +57,7 @@ Tick Kempston joystick interface
 HOW TO USE UDGS IN BASIC
 In this example, 4 UDGs C,D,H and S are defined as club, diamond, heart and spade.
 Set g to the number of UDGs required from 1 to 21.
-9000 FOR g=1 TO 4: READ g$: FOR y=0 TO 7: READ x: POKE USR g$+y,x: NEXT y: NEXT g
+9000 FOR g=1 to 4: READ g$: FOR y-0 TO 7: READ x: POKE USR g$+y,x: NEXT y: NEXT g
 9010 DATA "c",16,56,56,84,254,254,84,56
 9020 DATA "d",16,56,124,254,254,124,56,16
 9030 DATA "h",108,254,254,254,254,124,56,16
