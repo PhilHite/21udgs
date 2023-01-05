@@ -1,7 +1,7 @@
 # 21udgs
 A User Defined Graphics character designer for the ZX Spectrum 48K/128K
 
-21UDGS By Phil Hite 2007 Version 1.51
+21UDGS By Phil Hite 2007 Version 1.52
 
 Freeware for the 48K or 128K ZX Spectrum.
 
@@ -31,8 +31,8 @@ Keys:  ? or H=Help
        Q=Quit
 
 There are 2 Versions:
-21udgs151   =Machine Code compiled with MCoder III
-21udgs151bas=BASIC included for reference only as it is slow
+21udgs152   =Machine Code compiled with MCoder III
+21udgs152bas=BASIC included for reference only as it is slow
 1540 FOR h=1 TO dh: NEXT h
 This line slows the program down for compiling
 Remove REM before compiling with MCoder III
@@ -45,7 +45,7 @@ If you BREAK into 21udgs151, restart the program with GO TO 20
 Kempston joystick emulation with the Fuse emulator on the Mac
 10 PRINT IN 31: GO TO 10
 When Preferences > Set joysticks on snapshot load is ticked, Kempston joystick emulation returns IN 31 values of 255 and 56 instead of 0.  
-21udgs151 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
+21udgs152.szx and 21udgs152.z80 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
 Kempston joystick Settings for 21udgs151.tzx
 Preferences > Untick Set joysticks on snapshot load
 Inputs > Joystick 1
@@ -137,4 +137,4 @@ Thank you to everyone on the World of Spectrum and Spectrum Computing forums for
 https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
 phil_hite@hotmail.com
 
-30 July 2022
+5 Jan 2022
