@@ -1,7 +1,7 @@
    10 REM 21UDGS EXAMPLES BY PHIL HITE 2021
    20 LIST : STOP 
    30 REM HOW TO USE UDGS IN BASIC
-   40 REM In this example, 4 UDGs are defined as club, diamond, heart and spade.
+   40 REM In this example, 4 UDGs are defined as club, diamond, heart, and spade.
    50 REM Set g to the number of UGS required from 1 to 21.
    60 FOR g=1 TO 4: READ g$: FOR y=0 TO 7: READ x: POKE USR g$+y,x: NEXT y: NEXT g
    70 DATA "c",16,56,56,84,254,254,84,56
@@ -31,8 +31,8 @@
   310 LET m=65200: GO SUB 340: REM Use Set 2.
   320 LET m=65032: GO SUB 340: REM Use Set 3.
   330 STOP 
-  340 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN : REM Load selected set into memory.
-  350 REM CHECK IF SPECTRUM 16K
+  340 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN : REM Load slected set into memory.
+  350 REM CHECK WHETHER SPECTRUM 16K
   360 IF PEEK 23733=127 THEN PRINT "THIS IS A SPECTRUM 16K"
   370 REM ADDITIONAL SETS OF UDGS SPECTRUM 16K
   380 REM UDGs are stored in address 32600.
@@ -47,7 +47,7 @@
   470 LET m=32432: GO SUB 500: REM Use Set 2.
   480 LET m=32264: GO SUB 500: REM Use Set 3.
   490 STOP 
-  500 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN : REM Load selected set into memory.
+  500 POKE 23675,m-256*INT (m/256): POKE 23676,INT (m/256): RETURN : REM Load slected set into memory.
   510 REM SCREEN$ UDGS COLLISION DETECTION
   520 REM SCREEN$ can't usually detect UDGs, but here's a solution.
   530 PRINT "\a": REM GRAPHICS A
