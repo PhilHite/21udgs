@@ -1,7 +1,4 @@
-# 21udgs
-A User Defined Graphics character designer for the ZX Spectrum 48K/128K
-
-21UDGS By Phil Hite 2007 Version 1.52
+21UDGS By Phil Hite 2007 Version 1.54
 
 Freeware for the 48K or 128K ZX Spectrum.
 
@@ -17,36 +14,36 @@ Keys:  ? or H=Help
        S=Swap colours O=Clear colours/Undo
        J=Clear pixels/Undo
        X=Cut C=Copy V=Paste
-       N=Inverse Y=Rotate left U=Rotate right
+       N=Invert Y=Rotate left U=Rotate right
        W=Flip horizontally E=Flip vertically
        M=Memory address - or +
        G=Define graphics
        D=List decimal codes
        E=Edit
        K=Pick up graphics from memory
-       R=Resize grid to 5x4, 8x2 or 7x3     
+       R=Resize grid to 5x4, 8x2, or 7x3     
        S=Save V=Verify L=Load
        T=Print         
        A=Clear grid      
        Q=Quit
 
 There are 2 Versions:
-21udgs152   =Machine Code compiled with MCoder III
-21udgs152bas=BASIC included for reference only as it is slow
+21udgs154   =Machine Code compiled with MCoder III
+21udgs154bas=BASIC included for reference only as it is slow
 1540 FOR h=1 TO dh: NEXT h
 This line slows the program down for compiling
 Remove REM before compiling with MCoder III
 Delete line 10 before compiling with MCoder III (to save precious bytes of memory)
-Compile using a 128K Spectrum in 48K mode (again to save precious bytes of memory) 
 Use GO TO 20 and not RUN to run the program
-21udgs151bas.txt=BASIC txt file
-If you BREAK into 21udgs151, restart the program with GO TO 20
+21udgs154bas.txt=BASIC txt file
+If you BREAK into 21udgs154, restart the program with GO TO 20
 
-Kempston joystick emulation with the Fuse emulator on the Mac
+Kempston joystick emulation with the Fuse emulator on the Mac 
 10 PRINT IN 31: GO TO 10
-When Preferences > Set joysticks on snapshot load is ticked, Kempston joystick emulation returns IN 31 values of 255 and 56 instead of 0.  
-21udgs152.szx and 21udgs152.z80 snapshots do not work as expected because the the program expects IN 31 to return 0 when the joystick is idle.
-Kempston joystick Settings for 21udgs151.tzx
+When Preferences > Set joysticks on snapshot load is ticked, Kempston joystick emulation returns IN 31 values of 255 and 56 instead of 0.
+21udgs154 code handles this fault for accurate Kempston joystick emulation.
+
+Kempston joystick settings for 21udgs154.tzx
 Preferences > Untick Set joysticks on snapshot load
 Inputs > Joystick 1
 Real device SPEED_LINK Competition Pro
@@ -55,7 +52,7 @@ Untick Interface 2
 Tick Kempston joystick interface 
 
 HOW TO USE UDGS IN BASIC
-In this example, 4 UDGs C,D,H and S are defined as club, diamond, heart and spade.
+In this example, 4 UDGs C,D,H, and S are defined as club, diamond, heart, and spade.
 Set g to the number of UDGs required from 1 to 21.
 9000 FOR g=1 TO 4: READ g$: FOR y=0 TO 7: READ x: POKE USR g$+y,x: NEXT y: NEXT g
 9010 DATA "c",16,56,56,84,254,254,84,56
@@ -134,7 +131,7 @@ https://www.worldofspectrum.org
 https://spectrumcomputing.co.uk
 Thank you to everyone on the World of Spectrum and Spectrum Computing forums for your advice and encouragement.
 
-https://s3-eu-west-1.amazonaws.com/plhite.web/spectrum/index.html
+https://21udgs.com
 phil_hite@hotmail.com
 
-5 Jan 2022
+24 September 2024
